@@ -1,0 +1,20 @@
+package org.example;
+
+import java.lang.Number;
+import java.lang.String;
+
+rule "rule"
+dialect "mvel"
+when
+    SourceModel(
+        sourceString : sourceString != null ,
+        sourceMap : sourceMap != null
+    )
+    destination : DestinationModel( )
+        (someValue : String( ) from sourceMap.get("key02"))
+then
+    modify( destination ) {
+        setDestinationString( sourceString ),
+        setDestinationStringFromMap01( someValue )
+    }
+end
